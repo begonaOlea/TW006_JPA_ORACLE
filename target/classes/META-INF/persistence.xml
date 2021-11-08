@@ -26,11 +26,12 @@
 	<persistence-unit name="OracleHRPU" transaction-type="RESOURCE_LOCAL">
 		
 		
-		<class>com.curso.endidades.Trabajo</class>
+		<class>com.curso.entidades.Trabajo</class>
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 		
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:49161:xe" />
 			<property name="javax.persistence.jdbc.user" value="HR" />
 			<property name="javax.persistence.jdbc.password" value="hr" />
 			

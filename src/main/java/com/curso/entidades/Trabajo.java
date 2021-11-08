@@ -1,9 +1,14 @@
 package com.curso.entidades;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="JOBS")
@@ -21,6 +26,12 @@ public class Trabajo {
 	
 	@Column(name = "MAX_SALARY")
 	private double salarioMax;
+	
+	@Transient
+	private boolean chequed;
+	
+	
+	
 	
 	public Trabajo() {
 	}
@@ -63,6 +74,12 @@ public class Trabajo {
 
 	public void setSalarioMax(double salarioMax) {
 		this.salarioMax = salarioMax;
+	}
+
+	@Override
+	public String toString() {
+		return "Trabajo [idTrabajo=" + idTrabajo + ", titulo=" + titulo + ", salarioMin=" + salarioMin + ", salarioMax="
+				+ salarioMax + "]";
 	}
 	
 	
