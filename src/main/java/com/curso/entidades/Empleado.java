@@ -22,9 +22,6 @@ public class Empleado implements Serializable {
 	@SequenceGenerator(sequenceName = "EMPLOYEES_SEQ", name = "CUST_SEQ", allocationSize=1)
 	@Column(name = "EMPLOYEE_ID")
 	private Long id;
-	
-	
-	
 
 	@Column(name = "FIRST_NAME")
 	private String nombre;
@@ -38,12 +35,9 @@ public class Empleado implements Serializable {
 	@Temporal(TemporalType.DATE) // javax.persistence.Temporal
 	@Column(name = "HIRE_DATE")
 	private Date fechaContratacion; // java.util.Date
-	
-	
 
 	@Column(name = "JOB_ID")
 	private String idTrabajo;       // USO  PARA INSERTS UPDATES 
-
 
 	@Column(name = "SALARY")
 	private Double salario;

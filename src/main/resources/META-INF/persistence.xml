@@ -25,9 +25,11 @@
 		<!--  otra unidad persistenci para ir HR de oracle -->
 	<persistence-unit name="OracleHRPU" transaction-type="RESOURCE_LOCAL">
 		
+		<!--  provider>clase PROVEEDOR ORM</provider-->
 		
 		<class>com.curso.entidades.Trabajo</class>
-		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+		<class>com.curso.entidades.Empleado</class>
+	
 		
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver" />
@@ -37,7 +39,7 @@
 			
 
 			<!-- EclipseLink should create the database schema automatically -->
-			<property name="eclipselink.logging.level" value="FINE"/> 
+			<property name="eclipselink.logging.level" value="FINE"/>  
 			<property name="eclipselink.exclude-eclipselink-orm" value="true"/>				
 		</properties>
 
