@@ -1,5 +1,7 @@
 package com.curso.dao;
 
+import java.util.List;
+
 import com.curso.entidades.Empleado;
 /**
  * Implementa las operaciones CRUD
@@ -17,9 +19,16 @@ public interface EmpleadoDAO {
 	void modificar(Empleado e);
 	void borrar(int id);
 	Empleado  getByID(int id);
-   //List<Empleado> getAll();
+    List<Empleado> getAll();
 	
 }
+
+
+
+
+
+
+
 
 
 
