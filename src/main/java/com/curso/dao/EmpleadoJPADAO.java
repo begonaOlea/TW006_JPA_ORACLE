@@ -1,8 +1,26 @@
 package com.curso.dao;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import com.curso.entidades.Empleado;
 
 public class EmpleadoJPADAO implements EmpleadoDAO {
+
+
+   public static EntityManagerFactory factory;
+   private EntityManager em;
+	
+	
+   static {
+	   factory =  Persistence.createEntityManagerFactory("OracleHRPU");
+   }
+   
+   public EmpleadoJPADAO(EntityManager em) {
+	 this.em = em;
+   }
+	
 
 	public Empleado crear(Empleado e) {
 		// TODO Auto-generated method stub
