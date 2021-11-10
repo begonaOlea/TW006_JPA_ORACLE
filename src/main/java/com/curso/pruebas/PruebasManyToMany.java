@@ -1,5 +1,7 @@
 package com.curso.pruebas;
 
+import java.util.ArrayList;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -38,8 +40,14 @@ public class PruebasManyToMany {
 		p.setDescription("Desarrollo Angular ");
 	
 		em.persist(p);
+	
+		p.setWorkers(new ArrayList<Worker>());
+		p.getWorkers().add(w1);
+		p.getWorkers().add(w2);
+		
 		
 		//añado 1 trabaj mas
+		  //pendiente luego
 		
 		em.getTransaction().commit();
 	}
