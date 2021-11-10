@@ -22,10 +22,18 @@ public class Pais implements Serializable {
 	@Column(name="COUNTRY_NAME")
 	private String countryName;
 
+
+	@Column(name="REGION_ID")
+	private long idRegion;
+	
 	//bi-directional many-to-one association to Region
 	@ManyToOne
-	@JoinColumn(name="REGION_ID")
+	@JoinColumn(name="REGION_ID", 
+					insertable = false,
+					updatable = false)
 	private Region region;
+	
+	
 
 	//bi-directional many-to-one association to Localidad
 	@OneToMany(mappedBy="country", fetch = FetchType.EAGER) //LAZY
@@ -64,6 +72,13 @@ public class Pais implements Serializable {
 
 	public void setLocations(List<Localidad> locations) {
 		this.locations = locations;
+	}
+	
+	public long getIdRegion() {
+		return idRegion;
+	}
+	public void setIdRegion(long idRegion) {
+		this.idRegion = idRegion;
 	}
 
 	public Localidad addLocation(Localidad location) {
