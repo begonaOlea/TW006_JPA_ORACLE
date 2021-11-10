@@ -1,4 +1,4 @@
-package endidades;
+package com.curso.otras;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -16,15 +16,16 @@ public class Region implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="REGION_ID")
 	private long regionId;
 
 	@Column(name="REGION_NAME")
 	private String regionName;
 
-	//bi-directional many-to-one association to Country
-	@OneToMany(mappedBy="region")
-	private List<Country> countries;
+	//bi-directional many-to-one association to Pais
+	@OneToMany(mappedBy="region",fetch = FetchType.EAGER) //LAZY
+	private List<Pais> countries;
 
 	public Region() {
 	}
@@ -45,22 +46,22 @@ public class Region implements Serializable {
 		this.regionName = regionName;
 	}
 
-	public List<Country> getCountries() {
+	public List<Pais> getCountries() {
 		return this.countries;
 	}
 
-	public void setCountries(List<Country> countries) {
+	public void setCountries(List<Pais> countries) {
 		this.countries = countries;
 	}
 
-	public Country addCountry(Country country) {
+	public Pais addCountry(Pais country) {
 		getCountries().add(country);
 		country.setRegion(this);
 
 		return country;
 	}
 
-	public Country removeCountry(Country country) {
+	public Pais removeCountry(Pais country) {
 		getCountries().remove(country);
 		country.setRegion(null);
 

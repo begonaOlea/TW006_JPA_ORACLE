@@ -54,13 +54,12 @@ public class EmpleadoJPADAO implements EmpleadoDAO {
 
 	public List<Empleado> getAll() {
 		//consulta
-		String consulta = "SELECT e from Empleado e";
-		Query query = em.createQuery(consulta);
+		//String consulta = "SELECT e from Empleado e";
+		//Query query = em.createQuery(consulta);
 		
-		//Query query = em.createNamedQuery("Empleado.findAll");
+		Query query = em.createNamedQuery("Empleado.findAll");
 		return query.getResultList();
 	}	
-	
 	
 	
 	

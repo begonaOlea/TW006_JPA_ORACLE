@@ -1,7 +1,8 @@
-package endidades;
+package com.curso.otras;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -10,8 +11,8 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="COUNTRIES")
-@NamedQuery(name="Country.findAll", query="SELECT c FROM Country c")
-public class Country implements Serializable {
+@NamedQuery(name="Pais.findAll", query="SELECT p FROM Pais p")
+public class Pais implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -26,7 +27,11 @@ public class Country implements Serializable {
 	@JoinColumn(name="REGION_ID")
 	private Region region;
 
-	public Country() {
+	//bi-directional many-to-one association to Localidad
+	@OneToMany(mappedBy="country", fetch = FetchType.EAGER) //LAZY
+	private List<Localidad> locations;
+
+	public Pais() {
 	}
 
 	public String getCountryId() {
@@ -51,6 +56,28 @@ public class Country implements Serializable {
 
 	public void setRegion(Region region) {
 		this.region = region;
+	}
+
+	public List<Localidad> getLocations() {
+		return this.locations;
+	}
+
+	public void setLocations(List<Localidad> locations) {
+		this.locations = locations;
+	}
+
+	public Localidad addLocation(Localidad location) {
+		getLocations().add(location);
+		location.setCountry(this);
+
+		return location;
+	}
+
+	public Localidad removeLocation(Localidad location) {
+		getLocations().remove(location);
+		location.setCountry(null);
+
+		return location;
 	}
 
 }

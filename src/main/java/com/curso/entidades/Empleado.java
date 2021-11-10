@@ -5,9 +5,14 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -15,6 +20,15 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "EMPLOYEES")
+@NamedQueries({
+    @NamedQuery(name = "Empleado.findAll", 
+    		    query = "SELECT e FROM Empleado e"),
+    @NamedQuery(name = "Empleado.findAllByIdDept", 
+                query = "SELECT e FROM Empleado e WHERE e.idDepartamento = :id"),
+    @NamedQuery(name = "Empleado.findAllDatosBasicos", 
+    			query = "SELECT new com.curso.entidades.Empleado(e.id, e.nombre, e.apellidos)"
+    				  + " FROM Empleado e"),
+})
 public class Empleado implements Serializable {
 
 	@Id
@@ -43,8 +57,15 @@ public class Empleado implements Serializable {
 	private Double salario;
 	@Column(name = "COMMISSION_PCT")
 	private Double comision;
-	@Column(name = "MANAGER_ID")
-	private Long idManager;
+	
+//	@Column(name = "MANAGER_ID")
+//	private Long idManager;
+	
+	@ManyToOne//(fetch = FetchType.EAGER)
+	@JoinColumn(name = "MANAGER_ID",nullable = true)
+	private Empleado manager;
+	
+	
 	@Column(name = "DEPARTMENT_ID")
 	private Integer idDepartamento;
 

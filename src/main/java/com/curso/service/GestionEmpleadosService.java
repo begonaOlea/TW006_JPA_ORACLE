@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
+import javax.print.attribute.SetOfIntegerSyntax;
 
 import com.curso.dao.EmpleadoDAO;
 import com.curso.dao.EmpleadoJPADAO;
@@ -38,13 +40,7 @@ public class GestionEmpleadosService {
 			String Telefono,
 			String idJob, 
 			int idManager) {
-			
-//		TX new
-//		
-//		Tabajo  t = em.find(Trabajo.class, idJob);
-//		t.geSalMin();
-//		
-//		commit
+
 		
 	}
 	
@@ -59,16 +55,48 @@ public class GestionEmpleadosService {
 		for(Empleado e : lista) {
 			System.out.println(". " + e.getId() + " " + e.getNombre());
 		}
-		
-		
 	}
 	
 	
+	public List<Empleado> getAllEmpleadoPorDpto(int idDepartamento){
+		
+		 EntityManager em = EmpleadoJPADAO.factory.createEntityManager();
+		 Query query = em.createNamedQuery("Empleado.findAllByIdDept");
+		 //pasar parametro
+		 query.setParameter("id", idDepartamento);
+		 return query.getResultList();
+		
+	}
+	
+	public List<Empleado> getEmpleadosParaListar(){
+		
+		 EntityManager em = EmpleadoJPADAO.factory.createEntityManager();
+		 Query query = em.createNamedQuery("Empleado.findAllDatosBasicos");
+		 return query.getResultList();
+	}
+
 	public static void main(String[] args) {
 		
 		GestionEmpleadosService service = new GestionEmpleadosService();
 		service.informeEmpleados();
+
+		List<Empleado> empleadosDptoAdm = service.getAllEmpleadoPorDpto(10);
+		
+		for(Empleado e : empleadosDptoAdm) {
+			System.out.println(". " + e.getId() + " " + e.getNombre() 
+			+ " - " + e.getEmail());
+		}
+		
+		System.out.println("----  lista empleados --- ");	
+		
+		List<Empleado> lista = service.getEmpleadosParaListar();
+		for(Empleado e :lista) {
+			System.out.println(". " + e.getId() + " " + e.getNombre() 
+			+ " - " + e.getEmail());
+		}
 	}
+	
+	
 	
 	
 	
