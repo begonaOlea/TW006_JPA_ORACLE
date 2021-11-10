@@ -43,6 +43,8 @@ public class GestionProyectosService {
 				p.getWorkers().add(w);
 			}
 		}
+		em.merge(p);
+		
 		em.getTransaction().commit();
 	}
 	
@@ -50,9 +52,9 @@ public class GestionProyectosService {
 		
 		GestionProyectosService service = new GestionProyectosService();
 		
-		Project nuevo = service.crearProyecto("Desarrollo web java");
+		Project nuevo = service.crearProyecto("Configuracion e");
 		Worker w1 = new Worker(12);
-		Worker w2 = new Worker(12);
+		Worker w2 = new Worker(13);
 		
 		service.asignarTrabajadores(nuevo.getId(), w1, w2);
 		
