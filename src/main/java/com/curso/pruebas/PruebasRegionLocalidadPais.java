@@ -47,7 +47,10 @@ public class PruebasRegionLocalidadPais {
 		Pais pNew = new Pais();
 		pNew.setCountryId("AB");
 		pNew.setCountryName("Mi Pais");
-		pNew.setIdRegion(1);
+		//pNew.setIdRegion(1);
+		Region r = new Region();
+		r.setRegionId(1);
+		pNew.setRegion(r);
 		
 		em.getTransaction().begin();
 		
