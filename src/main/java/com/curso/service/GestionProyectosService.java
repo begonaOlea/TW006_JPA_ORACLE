@@ -1,5 +1,6 @@
 package com.curso.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -30,21 +31,33 @@ public class GestionProyectosService {
 		return p2; //p2 es null si no lo encuentra
 	}
 	
-	public void asignarTrabajadores(List<Worker> trabajadores, int idProyecto) {
+	public void asignarTrabajadores( int idProyecto, Worker... trabajadores) {
+		EntityManager em = FactoriaEntityManagersSingletone.getEntityManager();
+		em.getTransaction().begin();
 		
-		
-		
+		Project  p = getPorId(idProyecto);
+		if(p !=null ) {
+			if(p.getWorkers() == null ) p.setWorkers(new ArrayList());
+			
+			for(Worker w : trabajadores) {
+				p.getWorkers().add(w);
+			}
+		}
+		em.getTransaction().commit();
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public static void main(String[] args) {
+		
+		GestionProyectosService service = new GestionProyectosService();
+		
+		Project nuevo = service.crearProyecto("Desarrollo web java");
+		Worker w1 = new Worker(12);
+		Worker w2 = new Worker(12);
+		
+		service.asignarTrabajadores(nuevo.getId(), w1, w2);
+		
+	}
+
 	
 
 }

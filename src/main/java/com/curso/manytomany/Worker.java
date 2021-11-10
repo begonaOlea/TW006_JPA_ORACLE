@@ -28,6 +28,10 @@ public class Worker implements Serializable{
 	
 	public Worker() {
 	}
+	
+	public Worker(Integer id) {
+		this.id = id;
+	}
 
 	public Integer getId() {
 		return id;
